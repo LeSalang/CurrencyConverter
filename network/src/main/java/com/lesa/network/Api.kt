@@ -18,7 +18,7 @@ interface Api {
     @GET(GET_LATEST_EXCHANGE_RATES)
     suspend fun getExchangeRates(
         @Query("base_currency") baseCurrency: String
-    )
+    ): ExchangeRatesResponse
 }
 
 fun createApi(

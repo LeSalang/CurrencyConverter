@@ -67,7 +67,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             ) {
                 CurrencyItem(
                     title = "from",
-                    currency = Currency.RUB
+                    currencyUi = CurrencyUi.RUB
                 )
                 Spacer(modifier = Modifier.size(16.dp))
                 Box(
@@ -96,7 +96,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.size(4.dp))
                 CurrencyItem(
                     title = "to",
-                    currency = Currency.JPY
+                    currencyUi = CurrencyUi.JPY
                 )
             }
         }
@@ -108,7 +108,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 @Composable
 fun CurrencyItem(
     title: String,
-    currency: Currency,
+    currencyUi: CurrencyUi,
     modifier: Modifier = Modifier
 ) {
     Column {
@@ -122,15 +122,15 @@ fun CurrencyItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = currency.drawableRes),
-                contentDescription = currency.country,
+                painter = painterResource(id = currencyUi.drawableRes),
+                contentDescription = currencyUi.fullName,
                 modifier = Modifier
                     .size(64.dp)
                     .clip(CircleShape)
             )
             Spacer(modifier = Modifier.size(16.dp))
             Text(
-                text = currency.code,
+                text = currencyUi.code,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Medium,
