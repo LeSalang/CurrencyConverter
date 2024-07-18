@@ -4,10 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.lesa.uikit"
+    namespace = "com.lesa.ui"
     compileSdk = libs.versions.androidSdk.compile.get().toInt()
+
     defaultConfig {
         minSdk = libs.versions.androidSdk.min.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
@@ -35,11 +37,9 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.material3)
-    api(libs.androidx.ui.graphics)
-    api(libs.androidx.ui.text.google.fonts)
-    api(libs.androidx.ui.tooling.preview)
-    api(platform(libs.androidx.compose.bom))
-    debugApi(libs.androidx.ui.tooling)
+    // Core:
     implementation(libs.androidx.core.ktx)
+
+    // Modules:
+    implementation(project(":uikit"))
 }
