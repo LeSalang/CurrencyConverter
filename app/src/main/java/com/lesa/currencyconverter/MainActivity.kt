@@ -12,16 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.lesa.currencyconverter.ui.theme.CurrencyConverterTheme
+import com.lesa.uikit.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CurrencyConverterTheme {
+            AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android", modifier = Modifier.padding(innerPadding)
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
@@ -35,7 +37,8 @@ fun Greeting(
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = "Hello $name!", modifier = modifier
+        text = "Hello $name!",
+        modifier = modifier
     )
 }
 
