@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -6,4 +8,23 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.detekt) apply true
+}
+
+allprojects.onEach {
+    it.afterEvaluate {
+        with(project.plugins) {
+            if (hasPlugin(libs.plugins.jetbrains.kotlin.android.get().pluginId)) {
+                apply(libs.plugins.detekt.get().pluginId)
+                extensions.configure<DetektExtension> {
+                    config.setFrom(rootProject.files("detekt-config.yml"))
+                }
+                dependencies.add(
+                    "detektPlugins",
+                    libs.detekt.formatting.get()
+                        .toString()
+                )
+            }
+        }
+    }
 }

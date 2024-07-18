@@ -22,6 +22,9 @@ okhttp = "4.12.0"
 retrofit = "2.11.0"
 retrofitAdaptersResult = "1.0.10"
 
+# Detekt:
+detekt = "1.23.3"
+
 # Test:
 espressoCore = "3.6.1"
 junit = "4.13.2"
@@ -52,6 +55,9 @@ retrofit2-converter-kotlinx-serialization = { group = "com.squareup.retrofit2", 
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-adapters-result = { group = "com.github.skydoves", name = "retrofit-adapters-result", version.ref = "retrofitAdaptersResult" }
 
+# Detekt:
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+
 # Test:
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -68,5 +74,8 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Detekt:
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
 
 
