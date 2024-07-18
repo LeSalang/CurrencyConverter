@@ -23,6 +23,10 @@ okhttp = "4.12.0"
 retrofit = "2.11.0"
 retrofitAdaptersResult = "1.0.10"
 
+# Dependency injection:
+dagger = "2.51.1"
+javax-inject = "1"
+
 # Detekt:
 detekt = "1.23.3"
 
@@ -52,6 +56,11 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "json" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+# Dependency Injection:
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "dagger" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
+
 # Network:
 okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 okhttp3-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
@@ -78,6 +87,9 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Dependency Injection:
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger"}
 
 # Detekt:
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
