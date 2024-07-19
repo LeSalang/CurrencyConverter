@@ -9,7 +9,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-
 dependencies {
     // Core:
     api(libs.kotlinx.serialization.json)
@@ -21,5 +20,4 @@ dependencies {
     implementation(libs.retrofit.adapters.result)
     implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.retrofit2.retrofit)
-
 }

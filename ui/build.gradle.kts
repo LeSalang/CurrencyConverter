@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -39,7 +41,14 @@ android {
 dependencies {
     // Core:
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // DI
+    implementation(libs.hilt.android)
+    implementation(libs.javax.inject)
+    kapt(libs.hilt.compiler)
 
     // Modules:
     implementation(project(":uikit"))
+    implementation(project(":ui_logic"))
 }

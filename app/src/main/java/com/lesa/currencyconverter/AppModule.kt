@@ -1,5 +1,7 @@
 package com.lesa.currencyconverter
 
+import com.lesa.data.ExchangeRateRepository
+import com.lesa.data.ExchangeRateRepositoryImpl
 import com.lesa.network.Api
 import com.lesa.network.createApi
 import dagger.Module
@@ -33,5 +35,11 @@ object AppModule {
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRepository(api: Api): ExchangeRateRepository {
+        return ExchangeRateRepositoryImpl(api)
     }
 }

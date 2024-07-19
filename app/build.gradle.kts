@@ -88,6 +88,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Modules:
+    implementation(project(":data"))
     implementation(project(":network"))
     implementation(project(":uikit"))
     implementation(project(":ui"))
