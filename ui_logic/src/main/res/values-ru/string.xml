@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aud_full_name">Австралийский доллар</string>
+    <string name="bgn_full_name">Болгарский лев</string>
+    <string name="brl_full_name">Бразильский реал</string>
+    <string name="cad_full_name">Канадский доллар</string>
+    <string name="chf_full_name">Швейцарский франк</string>
+    <string name="cny_full_name">Китайский юань</string>
+    <string name="czk_full_name">Чешская крона</string>
+    <string name="dkk_full_name">Датская крона</string>
+    <string name="eur_full_name">Евро</string>
+    <string name="gbp_full_name">Британский фунт стерлингов</string>
+    <string name="huf_full_name">Венгерский форинт</string>
+    <string name="ils_full_name">Израильский шекель</string>
+    <string name="inr_full_name">Индийская рупия</string>
+    <string name="isk_full_name">Исландская крона</string>
+    <string name="jpy_full_name">Японская иена</string>
+    <string name="krw_full_name">Южнокорейская вона</string>
+    <string name="mxn_full_name">Мексиканское песо</string>
+    <string name="myr_full_name">Малайзийский ринггит</string>
+    <string name="nok_full_name">Норвежская крона</string>
+    <string name="nzd_full_name">Новозеландский доллар</string>
+    <string name="php_full_name">Филиппинское песо</string>
+    <string name="pln_full_name">Польский злотый</string>
+    <string name="ron_full_name">Румынский лей</string>
+    <string name="rub_full_name">Российский рубль</string>
+    <string name="sek_full_name">Шведская крона</string>
+    <string name="sgd_full_name">Сингапурский доллар</string>
+    <string name="thb_full_name">Тайский бат</string>
+    <string name="try_full_name">Турецкая лира</string>
+    <string name="usd_full_name">Доллар США</string>
+    <string name="zar_full_name">Южноафриканский рэнд</string>
+</resources>
+
+
