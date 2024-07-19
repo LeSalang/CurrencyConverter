@@ -66,7 +66,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     .padding(16.dp)
             ) {
                 CurrencyItem(
-                    title = "from",
                     currencyUi = CurrencyUi.RUB
                 )
                 Spacer(modifier = Modifier.size(16.dp))
@@ -95,7 +94,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 }
                 Spacer(modifier = Modifier.size(4.dp))
                 CurrencyItem(
-                    title = "to",
                     currencyUi = CurrencyUi.JPY
                 )
             }
@@ -107,46 +105,37 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun CurrencyItem(
-    title: String,
     currencyUi: CurrencyUi,
     modifier: Modifier = Modifier
 ) {
-    Column {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurface
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = currencyUi.drawableRes),
+            contentDescription = currencyUi.fullName,
+            modifier = Modifier
+                .size(64.dp)
+                .clip(CircleShape)
         )
         Spacer(modifier = Modifier.size(16.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = currencyUi.drawableRes),
-                contentDescription = currencyUi.fullName,
-                modifier = Modifier
-                    .size(64.dp)
-                    .clip(CircleShape)
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            Text(
-                text = currencyUi.code,
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier
-            )
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = "openList",
-                tint = MaterialTheme.colorScheme.primary
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-            )
-        }
+        Text(
+            text = currencyUi.code,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier
+        )
+        Icon(
+            imageVector = Icons.Default.ArrowDropDown,
+            contentDescription = "openList",
+            tint = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.size(16.dp))
+        TextField(
+            value = "",
+            onValueChange = {},
+        )
     }
 }
 
