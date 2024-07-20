@@ -48,9 +48,9 @@ private fun MainScreen(
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(16.dp))
         Calculator(viewModel = mainScreenViewModel)
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(16.dp))
         Keyboard(onClick = mainScreenViewModel::onKeyboardClick)
     }
 }
