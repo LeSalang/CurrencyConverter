@@ -9,7 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val repository: ExchangeRateRepository
+    private val repository: ExchangeRateRepository,
+    private val keyboardInputProcessor: KeyboardInputProcessor
 ) : ViewModel() {
 
     private val _result: MutableStateFlow<String> = MutableStateFlow("")
@@ -34,43 +35,16 @@ class MainScreenViewModel @Inject constructor(
 
     fun onKeyboardClick(key: KeyboardKey) {
         val inputAmountStr = _input.value.amount
-        when (key) {
-            is KeyboardKey.Digit -> {
-                val newAmount = if (inputAmountStr == "0") {
-                    inputAmountStr + "." + key.digit
-                } else {
-                    inputAmountStr + key.digit
-                }
-                _input.value = _input.value.copy(
-                    amount = newAmount
-                )
-                getExchangeResult()
-            }
-
-            KeyboardKey.Delete -> {
-                val newAmount = inputAmountStr.dropLast(1)
-                _input.value = _input.value.copy(
-                    amount = newAmount
-                )
-                getExchangeResult()
-            }
-
-            KeyboardKey.Separator -> {
-                val newAmount = if (inputAmountStr.isEmpty()) {
-                    "0."
-                } else if (inputAmountStr.contains(".")) {
-                    inputAmountStr
-                } else {
-                    "$inputAmountStr."
-                }
-                _input.value = _input.value.copy(
-                    amount = newAmount
-                )
-            }
-        }
+        _input.value = _input.value.copy(
+            amount = keyboardInputProcessor.invoke(
+                oldString = inputAmountStr,
+                inputKey = key
+            )
+        )
+        getExchangeResult()
     }
 
-    fun getExchangeResult(input: InputData = _input.value) {
+    private fun getExchangeResult(input: InputData = _input.value) {
         val rate = exchangeRates[input.toCurrency]
         if (rate == null) {
             _result.value = "error"
