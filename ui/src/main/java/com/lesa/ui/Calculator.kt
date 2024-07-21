@@ -27,6 +27,7 @@ import com.lesa.ui_logic.R
 
 @Composable
 fun Calculator(
+    onCurrencySelectorClick: () -> Unit,
     viewModel: MainScreenViewModel
 ) {
     Card(
@@ -44,7 +45,8 @@ fun Calculator(
             CurrencyInput(
                 currencyUi = com.lesa.ui_logic.CurrencyUi.RUB,
                 isActive = true,
-                text = viewModel.input.collectAsState().value.amount
+                text = viewModel.input.collectAsState().value.amount,
+                onCurrencySelectorClick = onCurrencySelectorClick
             )
             Spacer(modifier = Modifier.size(16.dp))
             Box(
@@ -72,7 +74,12 @@ fun Calculator(
                 }
             }
             Spacer(modifier = Modifier.size(16.dp))
-            CurrencyInput(isActive = false, text = viewModel.result.collectAsState().value, currencyUi = CurrencyUi.CHF)
+            CurrencyInput(
+                isActive = false,
+                text = viewModel.result.collectAsState().value,
+                currencyUi = CurrencyUi.CHF,
+                onCurrencySelectorClick = onCurrencySelectorClick
+            )
         }
     }
 }

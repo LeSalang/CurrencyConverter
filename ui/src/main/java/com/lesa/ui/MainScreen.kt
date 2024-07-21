@@ -10,14 +10,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lesa.ui_logic.MainScreenViewModel
-import com.lesa.uikit.AppTheme
 
 @Composable
 fun MainScreen(
@@ -34,6 +36,9 @@ private fun MainScreen(
     mainScreenViewModel: MainScreenViewModel,
     modifier: Modifier = Modifier,
 ) {
+    var isCurrencyPickerVisible by remember {
+        mutableStateOf(false)
+    }
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,26 +54,20 @@ private fun MainScreen(
             color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.size(16.dp))
-        Calculator(viewModel = mainScreenViewModel)
+        Calculator(
+            onCurrencySelectorClick = {
+                isCurrencyPickerVisible = true
+            },
+            viewModel = mainScreenViewModel
+        )
         Spacer(modifier = Modifier.size(16.dp))
         Keyboard(onClick = mainScreenViewModel::onKeyboardClick)
     }
-}
-
-@Suppress("UnusedPrivateMember")
-@Preview
-@Composable
-private fun MainScreenLightPreview() {
-    AppTheme(darkTheme = false) {
-        MainScreen()
-    }
-}
-
-@Suppress("UnusedPrivateMember")
-@Preview
-@Composable
-private fun MainScreenDarkPreview() {
-    AppTheme(darkTheme = true) {
-        MainScreen()
+    if (isCurrencyPickerVisible) {
+        CurrencyPicker(
+            onCompletion = {
+                isCurrencyPickerVisible = false
+            }
+        )
     }
 }
