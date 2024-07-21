@@ -60,7 +60,7 @@ class KeyboardInputProcessorTest {
         // given
         val oldString = "0"
         val key = KeyboardKey.Digit(1)
-        val expected = "0.1"
+        val expected = "1"
         // when
         val result = processor.invoke(oldString, key)
         // then
@@ -72,7 +72,7 @@ class KeyboardInputProcessorTest {
         // given
         val oldString = "1"
         val key = KeyboardKey.Delete
-        val expected = ""
+        val expected = "0"
         // when
         val result = processor.invoke(oldString, key)
         // then
@@ -92,9 +92,21 @@ class KeyboardInputProcessorTest {
     }
 
     @Test
-    fun `input separator when there is empty string`() {
+    fun `input delete when there is a separator in the end`() {
         // given
-        val oldString = ""
+        val oldString = "1,"
+        val key = KeyboardKey.Delete
+        val expected = "1"
+        // when
+        val result = processor.invoke(oldString, key)
+        // then
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun `input separator when there is zero`() {
+        // given
+        val oldString = "0"
         val key = KeyboardKey.Separator
         val expected = "0."
         // when

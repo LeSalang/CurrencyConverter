@@ -1,6 +1,5 @@
 package com.lesa.ui_logic
 
-import android.icu.number.NumberFormatter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lesa.data.ExchangeRateRepository

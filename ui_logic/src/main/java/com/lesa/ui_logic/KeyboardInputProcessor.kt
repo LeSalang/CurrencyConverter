@@ -19,18 +19,22 @@ class KeyboardInputProcessor @Inject constructor() {
                     return newString
                 }
                 newString = if (oldString == "0") {
-                    oldString + separator + inputKey.digit
+                    inputKey.digit.toString()
                 } else {
                     oldString + inputKey.digit
                 }
             }
 
             KeyboardKey.Delete -> {
-                newString = oldString.dropLast(1)
+                newString = if (oldString.length > 1) {
+                    oldString.dropLast(1)
+                } else {
+                    "0"
+                }
             }
 
             KeyboardKey.Separator -> {
-                newString = if (oldString.isEmpty()) {
+                newString = if (oldString == "0") {
                     "0$separator"
                 } else if (oldString.contains(separator)) {
                     oldString
