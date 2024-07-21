@@ -29,10 +29,6 @@ class MainScreenViewModel @Inject constructor(
     val input: StateFlow<InputData>
         get() = _input
 
-    fun newInput(input: InputData) {
-        _input.value = input
-    }
-
     fun onKeyboardClick(key: KeyboardKey) {
         val inputAmountStr = _input.value.amount
         _input.value = _input.value.copy(

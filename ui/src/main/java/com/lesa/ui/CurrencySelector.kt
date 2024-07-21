@@ -31,7 +31,7 @@ internal fun CurrencySelector(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = onClick)
             .padding(4.dp)
     ) {

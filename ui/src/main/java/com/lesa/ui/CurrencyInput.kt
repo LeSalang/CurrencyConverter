@@ -44,13 +44,13 @@ fun CurrencyInput(
             MaterialTheme.colorScheme.surfaceContainerLow
         }
         Card(
+            shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = cardColor,
             ),
             modifier = modifier
                 .fillMaxWidth()
                 .height(64.dp)
-                .clip(RoundedCornerShape(8.dp))
         ) {
             Text(
                 text = text,
