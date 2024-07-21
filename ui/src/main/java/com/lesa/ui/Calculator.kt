@@ -21,13 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.lesa.ui_logic.CurrencyUi
+import com.lesa.ui_logic.InputData
 import com.lesa.ui_logic.MainScreenViewModel
 import com.lesa.ui_logic.R
 
 @Composable
-fun Calculator(
-    onCurrencySelectorClick: () -> Unit,
+internal fun Calculator(
+    onCurrencySelectorClick: (PickerType) -> Unit,
+    inputData: InputData,
     viewModel: MainScreenViewModel
 ) {
     Card(
@@ -43,10 +44,10 @@ fun Calculator(
                 .padding(16.dp)
         ) {
             CurrencyInput(
-                currencyUi = com.lesa.ui_logic.CurrencyUi.RUB,
+                currencyUi = inputData.fromCurrency,
                 isActive = true,
-                text = viewModel.input.collectAsState().value.amount,
-                onCurrencySelectorClick = onCurrencySelectorClick
+                state = CurrencyInputState.Success(inputData.amount),
+                onCurrencySelectorClick = { onCurrencySelectorClick(PickerType.FROM) }
             )
             Spacer(modifier = Modifier.size(16.dp))
             Box(
@@ -59,6 +60,7 @@ fun Calculator(
                 )
                 IconButton(
                     onClick = {
+                        viewModel.swapCurrencies()
                     },
                     colors = IconButtonColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
@@ -76,9 +78,9 @@ fun Calculator(
             Spacer(modifier = Modifier.size(16.dp))
             CurrencyInput(
                 isActive = false,
-                text = viewModel.result.collectAsState().value,
-                currencyUi = CurrencyUi.CHF,
-                onCurrencySelectorClick = onCurrencySelectorClick
+                state = viewModel.result.collectAsState().value.toCurrencyInputState(),
+                currencyUi = inputData.toCurrency,
+                onCurrencySelectorClick = { onCurrencySelectorClick(PickerType.TO) }
             )
         }
     }

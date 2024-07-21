@@ -1,5 +1,6 @@
 package com.lesa.ui_logic
 
+import java.text.DecimalFormatSymbols
 import javax.inject.Inject
 
 class KeyboardInputProcessor @Inject constructor() {
@@ -8,13 +9,17 @@ class KeyboardInputProcessor @Inject constructor() {
         inputKey: KeyboardKey
     ): String {
         var newString = oldString
+        val separator = DecimalFormatSymbols.getInstance().decimalSeparator
         when (inputKey) {
             is KeyboardKey.Digit -> {
-                if (newString.contains('.') && newString.substringAfter('.').length >= 2) {
+                if (
+                    newString.contains(separator) &&
+                    newString.substringAfter(separator).length >= 2
+                ) {
                     return newString
                 }
                 newString = if (oldString == "0") {
-                    oldString + "." + inputKey.digit
+                    oldString + separator + inputKey.digit
                 } else {
                     oldString + inputKey.digit
                 }
@@ -26,11 +31,11 @@ class KeyboardInputProcessor @Inject constructor() {
 
             KeyboardKey.Separator -> {
                 newString = if (oldString.isEmpty()) {
-                    "0."
-                } else if (oldString.contains(".")) {
+                    "0$separator"
+                } else if (oldString.contains(separator)) {
                     oldString
                 } else {
-                    "$oldString."
+                    "$oldString$separator"
                 }
             }
         }

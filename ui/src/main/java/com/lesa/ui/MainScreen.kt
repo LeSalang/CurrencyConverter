@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,9 +37,10 @@ private fun MainScreen(
     mainScreenViewModel: MainScreenViewModel,
     modifier: Modifier = Modifier,
 ) {
-    var isCurrencyPickerVisible by remember {
-        mutableStateOf(false)
+    var pickerType by remember {
+        mutableStateOf<PickerType?>(null)
     }
+    val inputData = mainScreenViewModel.input.collectAsState().value
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,18 +58,35 @@ private fun MainScreen(
         Spacer(modifier = Modifier.size(16.dp))
         Calculator(
             onCurrencySelectorClick = {
-                isCurrencyPickerVisible = true
+                pickerType = it
             },
+            inputData = inputData,
             viewModel = mainScreenViewModel
         )
         Spacer(modifier = Modifier.size(16.dp))
         Keyboard(onClick = mainScreenViewModel::onKeyboardClick)
     }
-    if (isCurrencyPickerVisible) {
+    val shownPickerType = pickerType
+    if (shownPickerType != null) {
         CurrencyPicker(
             onCompletion = {
-                isCurrencyPickerVisible = false
+                it?.let { currencyUi ->
+                    when (shownPickerType) {
+                        PickerType.FROM -> {
+                            mainScreenViewModel.onChangedFromCurrency(currencyUi)
+                        }
+                        PickerType.TO -> {
+                            mainScreenViewModel.onChangedToCurrency(currencyUi)
+                        }
+                    }
+                }
+                pickerType = null
             }
         )
     }
+}
+
+internal enum class PickerType {
+    FROM,
+    TO,
 }

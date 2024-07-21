@@ -16,7 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CurrencyInput(
     isActive: Boolean,
-    text: String,
+    state: CurrencyInputState,
     currencyUi: com.lesa.ui_logic.CurrencyUi,
     onCurrencySelectorClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -52,10 +52,26 @@ fun CurrencyInput(
                 .fillMaxWidth()
                 .height(64.dp)
         ) {
+            val text: String
+            val color: Color
+            when (state) {
+                CurrencyInputState.Loading -> {
+                    text = "Loading..."
+                    color = MaterialTheme.colorScheme.onSurface
+                }
+                is CurrencyInputState.Error -> {
+                    text = state.text
+                    color = MaterialTheme.colorScheme.error
+                }
+                is CurrencyInputState.Success -> {
+                    text = state.text
+                    color = MaterialTheme.colorScheme.onSurface
+                }
+            }
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary,
+                color = color,
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.End,
                 maxLines = 1,
