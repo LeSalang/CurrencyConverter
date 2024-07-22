@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.detekt) apply true
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.protobuf) apply false
 }
 
 allprojects.onEach {

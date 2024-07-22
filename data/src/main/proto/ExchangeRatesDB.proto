@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.lesa.data";
+option java_multiple_files = true;
+
+message ExchangeRatesDB {
+  string from = 1;
+  string to = 2;
+  map<string, double> rates = 3;
+}

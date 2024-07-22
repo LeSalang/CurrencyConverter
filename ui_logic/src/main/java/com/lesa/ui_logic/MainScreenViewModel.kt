@@ -6,6 +6,7 @@ import com.lesa.data.ExchangeRateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
@@ -19,7 +20,7 @@ class MainScreenViewModel @Inject constructor(
     private val initialInput = InputData(
         fromCurrency = CurrencyUi.USD,
         toCurrency = CurrencyUi.RUB,
-        amount = "",
+        amount = "0",
     )
 
     private val _input: MutableStateFlow<InputData> = MutableStateFlow(initialInput)
@@ -33,7 +34,31 @@ class MainScreenViewModel @Inject constructor(
     private var exchangeRates = mapOf<CurrencyUi, Double>()
 
     init {
-        getExchangeRates(input.value.fromCurrency)
+        getCachedInput()
+        getExchangeRates(fromCurrencyUi = input.value.fromCurrency)
+    }
+
+    fun onKeyboardClick(key: KeyboardKey) {
+        val inputAmountStr = _input.value.amount
+        _input.value = _input.value.copy(
+            amount = keyboardInputProcessor.invoke(
+                oldString = inputAmountStr,
+                inputKey = key
+            )
+        )
+        getExchangeResult()
+    }
+
+    fun onChangedFromCurrency(fromCurrencyUi: CurrencyUi) {
+        _input.value = _input.value.copy(fromCurrency = fromCurrencyUi)
+        getExchangeRates(fromCurrencyUi = fromCurrencyUi)
+        saveToDataStore()
+    }
+
+    fun onChangedToCurrency(currency: CurrencyUi) {
+        _input.value = _input.value.copy(toCurrency = currency)
+        getExchangeResult()
+        saveToDataStore()
     }
 
     fun swapCurrencies() {
@@ -50,13 +75,36 @@ class MainScreenViewModel @Inject constructor(
                 }
             }
         )
-        getExchangeRates(currencyUi = input.value.fromCurrency)
+        getExchangeRates(fromCurrencyUi = input.value.fromCurrency)
+        saveToDataStore()
     }
 
-    private fun getExchangeRates(currencyUi: CurrencyUi) {
+    private fun getCachedInput() {
         viewModelScope.launch {
             try {
-                val response = repository.getExchangeRates(currencyUi.toCurrency())
+                val response = repository.loadFromDataStore().first()
+                _input.value = InputData(
+                    fromCurrency = response.from.toCurrencyUi(),
+                    toCurrency = response.to.toCurrencyUi(),
+                    amount = "0"
+                )
+                exchangeRates = response.rates.mapKeys {
+                    it.key.toCurrencyUi()
+                }
+            } catch (e: Exception) {
+                _result.value = ExchangeResultState.Error(e.message.toString())
+            }
+        }
+    }
+
+    private fun getExchangeRates(
+        fromCurrencyUi: CurrencyUi
+    ) {
+        viewModelScope.launch {
+            try {
+                val response = repository.getExchangeRatesFromApi(
+                    fromCurrency = fromCurrencyUi.toCurrency()
+                )
                 exchangeRates = response.mapKeys {
                     it.key.toCurrencyUi()
                 }
@@ -65,32 +113,7 @@ class MainScreenViewModel @Inject constructor(
                 _result.value = ExchangeResultState.Error(e.message.toString())
             }
         }
-    }
-
-    fun updateInput(input: InputData) {
-        _input.value = input
-        getExchangeResult()
-    }
-
-    fun onChangedFromCurrency(currency: CurrencyUi) {
-        _input.value = _input.value.copy(fromCurrency = currency)
-        getExchangeRates(currency)
-    }
-
-    fun onChangedToCurrency(currency: CurrencyUi) {
-        _input.value = _input.value.copy(toCurrency = currency)
-        getExchangeResult()
-    }
-
-    fun onKeyboardClick(key: KeyboardKey) {
-        val inputAmountStr = _input.value.amount
-        _input.value = _input.value.copy(
-            amount = keyboardInputProcessor.invoke(
-                oldString = inputAmountStr,
-                inputKey = key
-            )
-        )
-        getExchangeResult()
+        saveToDataStore()
     }
 
     private fun getExchangeResult(input: InputData = _input.value) {
@@ -108,5 +131,17 @@ class MainScreenViewModel @Inject constructor(
         }
         val result = inputAmount * rate
         _result.value = ExchangeResultState.Success(format.format(result))
+    }
+
+    private fun saveToDataStore() {
+        viewModelScope.launch {
+            repository.saveToDataStore(
+                from = input.value.fromCurrency.toCurrency(),
+                to = input.value.toCurrency.toCurrency(),
+                rates = exchangeRates.mapKeys {
+                    it.key.toCurrency()
+                }
+            )
+        }
     }
 }

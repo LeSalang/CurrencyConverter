@@ -28,6 +28,12 @@ javax-inject = "1"
 # Detekt:
 detekt = "1.23.3"
 
+# Storage:
+datastore = "1.1.1"
+protobuf = "3.21.11"
+protobuf-plugin = "0.9.4"
+
+
 # Test:
 espressoCore = "3.6.1"
 junit = "4.13.2"
@@ -63,6 +69,11 @@ retrofit2-converter-kotlinx-serialization = { group = "com.squareup.retrofit2", 
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-adapters-result = { group = "com.github.skydoves", name = "retrofit-adapters-result", version.ref = "retrofitAdaptersResult" }
 
+# Storage:
+androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore"}
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf"}
+protobuf-kotlin = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf"}
+
 # Detekt:
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
@@ -84,7 +95,10 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Dependency Injection:
-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger"}
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+
+# Storage:
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
 
 # Detekt:
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
