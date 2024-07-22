@@ -49,6 +49,6 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Modules:
-    implementation(project(":uikit"))
-    implementation(project(":ui_logic"))
+    implementation(project(":core:uikit"))
+    implementation(project(":feature:ui_logic"))
 }

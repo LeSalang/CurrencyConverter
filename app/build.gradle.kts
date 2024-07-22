@@ -27,7 +27,6 @@ android {
         buildConfigField("String", "API_KEY", "\"${localProperties["API_KEY"]}\"")
         buildConfigField("String", "API_BASE_URL", "\"https://api.freecurrencyapi.com/v1/\"")
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -79,17 +78,9 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    // Test:
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
     // Modules:
-    implementation(project(":data"))
-    implementation(project(":network"))
-    implementation(project(":uikit"))
-    implementation(project(":ui"))
+    implementation(project(":core:data"))
+    implementation(project(":core:network"))
+    implementation(project(":core:uikit"))
+    implementation(project(":feature:ui"))
 }

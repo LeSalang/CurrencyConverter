@@ -32,8 +32,6 @@ It fetches exchange rate data from the [FreecurrencyAPI](https://freecurrencyapi
 
 ### Screenshots
 
-![Screenshot 1](path/to/screenshot1.png) ![Screenshot 2](path/to/screenshot2.png) ![Screenshot 3](path/to/screenshot3.png)
-
 <p align="center">
 <img src = ".github/Screenshot_1.png" width="32%" />&nbsp;<img src = ".github/Screenshot_2.png" width="32%" />&nbsp;<img src = ".github/Screenshot_3.png" width="32%" />
 </p>

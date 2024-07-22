@@ -35,8 +35,8 @@ android {
 dependencies {
     // Core:
     implementation(libs.androidx.core.ktx)
-    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.javax.inject)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Storage:
     implementation(libs.androidx.datastore)
@@ -44,12 +44,12 @@ dependencies {
     implementation(libs.protobuf.kotlin)
 
     // Test:
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    testImplementation(libs.junit)
 
     // Module:
-    implementation(project(":network"))
+    implementation(project(":core:network"))
 }
 
 protobuf {
