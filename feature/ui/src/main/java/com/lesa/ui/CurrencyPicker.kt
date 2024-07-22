@@ -24,11 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.lesa.ui_logic.CurrencyUi
+import com.lesa.ui_logic.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,21 +77,21 @@ private fun CurrencyPickerItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(12.dp))
+            .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_medium)))
             .clickable(
                 onClick = onClick
             )
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         Image(
             painter = painterResource(id = currency.drawableRes),
             contentDescription = stringResource(id = currency.fullNameRes),
             modifier = Modifier
-                .size(48.dp)
+                .size(dimensionResource(id = R.dimen.size_small))
                 .clip(CircleShape)
         )
-        Spacer(modifier = Modifier.size(24.dp))
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_large)))
         Column {
             Text(
                 text = currency.name,

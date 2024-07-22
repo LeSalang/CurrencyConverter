@@ -17,10 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.lesa.ui_logic.R
 
 @Composable
 fun CurrencyInput(
@@ -37,26 +39,26 @@ fun CurrencyInput(
             currencyUi = currencyUi,
             onClick = onCurrencySelectorClick,
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
         val cardColor = if (isActive) {
             MaterialTheme.colorScheme.surfaceContainerHigh
         } else {
             MaterialTheme.colorScheme.surfaceContainerLow
         }
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_large)),
             colors = CardDefaults.cardColors(
                 containerColor = cardColor,
             ),
             modifier = modifier
                 .fillMaxWidth()
-                .height(64.dp)
+                .height(dimensionResource(id = R.dimen.size_large))
         ) {
             val text: String
             val color: Color
             when (state) {
                 CurrencyInputState.Loading -> {
-                    text = "Loading..."
+                    text = stringResource(R.string.loading)
                     color = MaterialTheme.colorScheme.onSurface
                 }
                 is CurrencyInputState.Error -> {
@@ -79,7 +81,7 @@ fun CurrencyInput(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentHeight()
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
         }
     }

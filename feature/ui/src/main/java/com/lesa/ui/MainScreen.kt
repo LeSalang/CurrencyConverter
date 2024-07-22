@@ -17,10 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lesa.ui_logic.MainScreenViewModel
+import com.lesa.ui_logic.R
 
 @Composable
 fun MainScreen(
@@ -47,15 +49,15 @@ private fun MainScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surfaceContainerLow)
-            .padding(16.dp)
+            .padding(dimensionResource(id = R.dimen.padding_medium))
     ) {
         Text(
-            text = "Currency converter",
+            text = stringResource(id = com.lesa.ui_logic.R.string.currency_converter),
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
         Calculator(
             onCurrencySelectorClick = {
                 pickerType = it
@@ -63,7 +65,7 @@ private fun MainScreen(
             inputData = inputData,
             viewModel = mainScreenViewModel
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
         Keyboard(onClick = mainScreenViewModel::onKeyboardClick)
     }
     val shownPickerType = pickerType
@@ -84,9 +86,4 @@ private fun MainScreen(
             }
         )
     }
-}
-
-internal enum class PickerType {
-    FROM,
-    TO,
 }

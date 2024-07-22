@@ -30,6 +30,11 @@
     <string name="try_full_name">Турецкая лира</string>
     <string name="usd_full_name">Доллар США</string>
     <string name="zar_full_name">Южноафриканский рэнд</string>
+    <string name="loading">Загрузка...</string>
+    <string name="open_currency_list">Открыть список валют</string>
+    <string name="delete">Удалить</string>
+    <string name="currency_converter">Конвертер валют</string>
+    <string name="swap">Сменить валюты</string>
 </resources>
 
 

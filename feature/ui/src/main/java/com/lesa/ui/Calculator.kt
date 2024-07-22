@@ -19,8 +19,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.lesa.ui_logic.InputData
 import com.lesa.ui_logic.MainScreenViewModel
 import com.lesa.ui_logic.R
@@ -37,11 +38,11 @@ internal fun Calculator(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(24.dp))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_extra_large)))
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
             CurrencyInput(
                 currencyUi = inputData.fromCurrency,
@@ -49,13 +50,13 @@ internal fun Calculator(
                 state = CurrencyInputState.Success(inputData.amount),
                 onCurrencySelectorClick = { onCurrencySelectorClick(PickerType.FROM) }
             )
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 HorizontalDivider(
-                    thickness = 1.dp,
+                    thickness = dimensionResource(id = R.dimen.divider_height),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 )
                 IconButton(
@@ -71,11 +72,11 @@ internal fun Calculator(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_swap),
-                        contentDescription = "swap",
+                        contentDescription = stringResource(id = R.string.swap),
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
             CurrencyInput(
                 isActive = false,
                 state = viewModel.result.collectAsState().value.toCurrencyInputState(),

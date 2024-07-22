@@ -18,7 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,12 +34,12 @@ fun Keyboard(
     onClick: (KeyboardKey) -> Unit,
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
         modifier = Modifier.fillMaxSize()
     ) {
         keyboardKeys.forEach { row ->
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
                 modifier = Modifier.weight(1f)
             ) {
                 row.forEach { keyboardKey ->
@@ -75,7 +77,7 @@ private fun DigitButton(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
-        modifier = modifier.clip(RoundedCornerShape(24.dp))
+        modifier = modifier.clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_extra_large)))
             .clickable(onClick = onClick)
     ) {
         Text(
@@ -99,7 +101,7 @@ private fun SeparatorButton(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
-        modifier = modifier.clip(RoundedCornerShape(24.dp))
+        modifier = modifier.clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_extra_large)))
             .clickable(onClick = onClick)
     ) {
         Text(
@@ -123,7 +125,7 @@ private fun DeleteButton(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
         ),
-        modifier = modifier.clip(RoundedCornerShape(24.dp))
+        modifier = modifier.clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_extra_large)))
             .clickable(onClick = onClick)
             .fillMaxSize()
     ) {
@@ -132,7 +134,7 @@ private fun DeleteButton(
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_delete),
-                contentDescription = "delete",
+                contentDescription = stringResource(id = R.string.delete),
                 tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(MaterialTheme.typography.displaySmall.fontSize.value.dp)
                     .align(Alignment.Center)

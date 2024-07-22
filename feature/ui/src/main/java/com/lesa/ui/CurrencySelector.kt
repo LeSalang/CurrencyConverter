@@ -17,11 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.lesa.ui_logic.CurrencyUi
+import com.lesa.ui_logic.R
 
 @Composable
 internal fun CurrencySelector(
@@ -31,18 +32,18 @@ internal fun CurrencySelector(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_large)))
             .clickable(onClick = onClick)
-            .padding(4.dp)
+            .padding(dimensionResource(id = R.dimen.padding_extra_small))
     ) {
         Image(
             painter = painterResource(id = currencyUi.drawableRes),
             contentDescription = stringResource(id = currencyUi.fullNameRes),
             modifier = Modifier
-                .size(56.dp)
+                .size(dimensionResource(id = R.dimen.size_medium))
                 .clip(CircleShape)
         )
-        Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.padding_medium)))
         Text(
             text = currencyUi.name,
             style = MaterialTheme.typography.titleLarge,
@@ -52,7 +53,7 @@ internal fun CurrencySelector(
         )
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
-            contentDescription = "openList",
+            contentDescription = stringResource(id = R.string.open_currency_list),
             tint = MaterialTheme.colorScheme.primary
         )
     }

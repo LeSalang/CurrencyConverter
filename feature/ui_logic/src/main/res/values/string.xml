@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
+    <string name="currency_converter">Currency Converter</string>
+    <string name="delete">Delete</string>
+    <string name="loading">Loading...</string>
+    <string name="open_currency_list">Open Currency List</string>
+    <string name="swap">Swap currencies</string>
+
+    <!-- Currencies -->
     <string name="aud_full_name">Australian Dollar</string>
     <string name="bgn_full_name">Bulgarian Lev</string>
     <string name="brl_full_name">Brazilian Real</string>
