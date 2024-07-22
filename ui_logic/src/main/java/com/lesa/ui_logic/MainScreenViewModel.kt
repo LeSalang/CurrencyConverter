@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.text.NumberFormat
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -122,15 +120,8 @@ class MainScreenViewModel @Inject constructor(
             _result.value = ExchangeResultState.Error("No rate found")
             return
         }
-        val format = NumberFormat.getInstance(Locale.getDefault())
-        format.maximumFractionDigits = 2
-        val inputAmount = try {
-            format.parse(input.amount)?.toDouble() ?: 0.0
-        } catch (e: Exception) {
-            0.0
-        }
-        val result = inputAmount * rate
-        _result.value = ExchangeResultState.Success(format.format(result))
+        val result = input.amount.parseToDouble() * rate
+        _result.value = ExchangeResultState.Success(result.parseToString())
     }
 
     private fun saveToDataStore() {
