@@ -33,7 +33,6 @@ class MainScreenViewModel @Inject constructor(
 
     init {
         getCachedInput()
-        getExchangeRates(fromCurrencyUi = input.value.fromCurrency)
     }
 
     fun onKeyboardClick(key: KeyboardKey) {
@@ -90,8 +89,9 @@ class MainScreenViewModel @Inject constructor(
                     it.key.toCurrencyUi()
                 }
             } catch (e: Exception) {
-                _result.value = ExchangeResultState.Error(e.message.toString())
+                _result.value = ExchangeResultState.Loading
             }
+            getExchangeRates(input.value.fromCurrency)
         }
     }
 
