@@ -28,9 +28,7 @@ import com.lesa.ui_logic.keyboardKeys
 import java.text.DecimalFormatSymbols
 
 @Composable
-fun Keyboard(
-    onClick: (KeyboardKey) -> Unit,
-) {
+fun Keyboard(onClick: (KeyboardKey) -> Unit) {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxSize()
